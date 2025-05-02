@@ -1,0 +1,73 @@
+MPIN Strength Checker – Assignment Report
+
+Student Details:-
+
+Name: Aamir Imam
+Roll Number: E22CSEU0220
+Course: Btech CSE (Data Science)
+Assignment Title: MPIN Strength Checker
+
+Problem Statement:
+
+Users often create MPINs (Mobile Personal Identification Numbers) that are weak, either due to their popularity (like 1234, 6996, 9999,   etc) or because they are based on personal information (like date of birth, anniversary etc). This makes MPINs vulnerable to brute-force or pattern-based attacks.
+
+Objective:
+
+-To develop a Python-based MPIN strength checker that:
+-To detect commonly used MPINs.
+-To identify MPINs derived from demographic data (DOBs, anniversaries).
+-To provide reasons for MPIN weakness.
+-To support both 4-digit and 6-digit MPINs.
+-To validate correctness using automated test cases.
+
+Approach to Solution:
+
+I broke down the project into four logical parts:
+
+*Part A – Commonly Used MPINs
+ -A predefined set (commonPins) is used.
+ -isCommon(mpin) returns True if MPIN is in this set.
+
+*Part B – Demographic-Based Weakness (Boolean)
+ -From dates like DDMMYYYY, combinations like DDMM, MMYY, YYDD are extracted.
+ -isWeakByDemographics() returns True if MPIN matches any segment.
+
+*Part C – Demographic Reasons
+ -isWeakByDemographics2() lists which dates caused weakness.
+ -This helps give feedback to users.
+
+*Part D – 4/6 Digit Support + Full Analysis
+ -isCommon2() and extract_segments2() support 6-digit MPINs.
+ -isWeakByDemographics3() uses extended logic to capture 6-digit patterns.
+ -Combined reasons are shown to the user.
+ -Input Validation
+  I used helper functions like valid_mpin_4(), valid_mpin_4_or_6(), and valid_date() to validate user input in real-time.
+
+*Test Case Design
+ I created a set of 20 test cases using a function test_mpin_cases().
+
+ Test Format
+ Each test case includes:
+ -MPIN
+ -DOB, Spouse DOB, Anniversary
+ -Expected Output: Strength (WEAK or STRONG)
+ -Expected Reasons (e.g., ["COMMONLY_USED"], ["DEMOGRAPHIC_DOB_SELF"])
+
+Sample Test case
+("1234", "01012000", "02021999", "03032020", "WEAK", ["COMMONLY_USED"])
+
+Edge Cases Covered
+-Only common MPIN match
+-Only demographic match
+-Both common + demographic
+-Strong MPIN not in any pattern
+
+Output
+The test function loops over each case, compares actual vs expected results, and prints "PASSED" or "FAILED" with debug information.
+
+Conclusion
+This project successfully:
+-Detects weak MPINs.
+-Explains the reason for weakness.
+-Supports both 4-digit and 6-digit MPINs.
+-Uses clean modular code and testing.
